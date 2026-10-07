@@ -184,11 +184,12 @@ function parseFrontmatter(content) {
 
   const result = {};
   for (const line of match[1].split(/\r?\n/)) {
-    const colonIdx = line.indexOf(':');
-    if (colonIdx === -1) continue;
-    const key   = line.slice(0, colonIdx).trim();
-    const value = line.slice(colonIdx + 1).trim().replace(/^['"]|['"]$/g, '');
-    if (key) result[key] = value;
+    if (/^\s*#/.test(line)) continue;
+    const m = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
+    if (!m) continue;
+    const key   = m[1];
+    const value = m[2].trim().replace(/^['"]|['"]$/g, '');
+    result[key] = value;
   }
   return result;
 }
@@ -234,7 +235,7 @@ function frontmatterYamlErrors(content) {
   const lines = match[1].split(/\r?\n/);
   lines.forEach((line, i) => {
     const lineNo = i + 2; // the opening `---` is line 1
-    if (!line.trim()) return;
+    if (!line.trim() || /^\s*#/.test(line)) return;
 
     if (/^[ ]*\t/.test(line)) {
       errors.push(

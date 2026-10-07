@@ -9,7 +9,7 @@ const fs   = require('node:fs');
 const os   = require('node:os');
 const path = require('node:path');
 
-const { lintSkillContent, lintSkillLayout, topLevelFrontmatterKeys } = require('./skill-lint.js');
+const { lintSkillContent, lintSkillLayout, topLevelFrontmatterKeys, parseFrontmatter, frontmatterYamlErrors } = require('./skill-lint.js');
 
 const KNOWN = new Set(['alpha', 'beta']);
 
@@ -648,3 +648,50 @@ test('the spec-key check tolerates CRLF frontmatter', () => {
   const { errors } = lintSkillContent('alpha', content, KNOWN);
   assert.equal(errors.filter(e => /key 'temperature'/.test(e)).length, 1);
 });
+
+test('parseFrontmatter ignores comments and nested metadata keys', () => {
+  const content = [
+    '---',
+    'name: alpha',
+    '# note: this is a comment',
+    'description: Designs alphas. Use when building one.',
+    'metadata:',
+    '  name: beta',
+    '  description: Nested details without trigger',
+    '---',
+    '',
+  ].join('\n');
+  assert.deepEqual(parseFrontmatter(content), {
+    name: 'alpha',
+    description: 'Designs alphas. Use when building one.',
+    metadata: '',
+  });
+});
+
+test('frontmatterYamlErrors ignores comment lines containing colons or quotes', () => {
+  const content = [
+    '---',
+    'name: alpha',
+    '# note: a comment: with a colon and "unclosed quote',
+    'description: "Designs alphas. Use when building one."',
+    '---',
+    '',
+  ].join('\n');
+  assert.deepEqual(frontmatterYamlErrors(content), []);
+});
+
+test('a skill with frontmatter comments and nested metadata passes validation', () => {
+  const content = withAllSections([
+    '---',
+    'name: alpha',
+    '# Note: keep description up to date: check docs',
+    'description: Designs alphas. Use when building one.',
+    'metadata:',
+    '  name: beta',
+    '  description: Internal notes',
+    '---',
+  ].join('\n'));
+  const { errors } = lintSkillContent('alpha', content, KNOWN);
+  assert.deepEqual(errors, []);
+});
+
