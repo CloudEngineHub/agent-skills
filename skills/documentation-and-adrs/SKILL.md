@@ -256,6 +256,16 @@ Special consideration for AI agent context:
 - **ADRs** — Help agents understand why past decisions were made (prevents re-deciding)
 - **Inline gotchas** — Prevent agents from falling into known traps
 
+## Prose Review
+
+After checking the technical content, review the prose for the people who will use it. Clearer wording must not change the decision or its limits.
+
+1. Mark the details that must survive the edit: names, numbers and units, commands, paths, links, conditions, trade-offs, and uncertainty. Check them against the available code and decision context; flag anything you cannot substantiate.
+2. Replace stock introductions, promotional adjectives, and repeated summaries with the concrete information the reader needs. Do not replace an unsupported claim with an invented example or a stronger guarantee. Keep necessary technical repetition and the project's established terminology.
+3. Compare the edited document with the original and its sources. Restore any lost qualifier or caveat, verify command and code examples still work as documented, and explain any unresolved factual question rather than polishing it away.
+
+If the team already uses a reviewed version of [Zero Slop](https://github.com/manavmishra/ZeroSlop/tree/43b71836bf2feb8395a84aaeea809bd7ef65e385), its source-preserving editing workflow can assist this pass. This reference pins v2.12.22; do not install or update a tool just to complete the review. Its writing score is heuristic, not proof of factual accuracy or AI authorship. A lower score does not replace the source comparison, and this step does not require sending the document to a hosted editor.
+
 ## Common Rationalizations
 
 | Rationalization | Reality |
@@ -286,3 +296,4 @@ After documenting:
 - [ ] Known gotchas are documented inline where they matter
 - [ ] No commented-out code remains
 - [ ] Rules files (CLAUDE.md etc.) are current and accurate
+- [ ] Prose edits preserve source details, decision trade-offs, and qualifiers without adding unsupported guarantees
