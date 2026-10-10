@@ -98,23 +98,9 @@ claude --plugin-dir /path/to/agent-skills
 </details>
 
 <details>
-<summary><b>Oh My Pi (OMP)</b></summary>
-
-OMP installs this repository's Claude Code marketplace plugin:
-
-```bash
-omp plugin marketplace add addyosmani/agent-skills
-omp plugin install agent-skills@addy-agent-skills
-```
-
-Restart OMP after installation; skills are discovered from their descriptions. See [docs/omp-setup.md](docs/omp-setup.md) for local clones and the OMP tool mapping.
-
-</details>
-
-<details>
 <summary><b>Cursor</b></summary>
 
-Put workflow skills under `.cursor/skills/` (sync from `agent-skills/skills/`) and short policies in `.cursor/rules/*.mdc` — do not paste full skills into rules. See [docs/cursor-setup.md](docs/cursor-setup.md).
+Put workflow skills under `.cursor/skills/` (sync from `agent-skills/skills/`) and short policies in `.cursor/rules/*.mdc` — do not paste full skills into rules. Both directories live in your project; this repo does not ship a `.cursor/` folder. See [docs/cursor-setup.md](docs/cursor-setup.md).
 
 </details>
 
@@ -176,7 +162,7 @@ See [docs/opencode-setup.md](docs/opencode-setup.md).
 <details>
 <summary><b>GitHub Copilot</b></summary>
 
-Use agent definitions from `agents/` as Copilot personas and skill content in `.github/copilot-instructions.md`. See [docs/copilot-setup.md](docs/copilot-setup.md).
+Use agent definitions from `agents/` as Copilot personas and skill content in `.github/copilot-instructions.md`. The lifecycle slash commands (`/spec`, `/plan`, `/build`, `/test`, `/review`, `/ship`) are Claude Code commands and do not appear in Copilot; invoke the skills by name (`/spec-driven-development`, …) instead. See [docs/copilot-setup.md](docs/copilot-setup.md).
 
 Using the standalone `copilot` CLI? Install it as a plugin — see [docs/copilot-cli-setup.md](docs/copilot-cli-setup.md).
 
@@ -202,21 +188,6 @@ The first command registers the marketplace; the second installs the plugin. Cod
 </details>
 
 <details>
-<summary><b>Dojo Workspace</b></summary>
-
-Installing Dojo Workspace puts the `dojo` command on your PATH:
-
-```bash
-dojo skills add addyosmani/agent-skills
-```
-
-If `dojo` is not on your PATH, add its install folder: `~/.local/bin` on macOS/Linux (`~/.local/bin/dojo`) or `%LOCALAPPDATA%\dojo\bin` on Windows (`dojo.exe`). Or run the binary by its full path.
-
-Skills install into `~/.agents/skills/`; enable the ones you want for each lane (Dojo Solo / Dojo Duo). Add `-p` to install into the current project's `.agents/skills/` instead. You can also install from the app's **Skills** panel → **Add External Skills**. See [docs/dojo-setup.md](docs/dojo-setup.md).
-
-</details>
-
-<details>
 <summary><b>Command Code</b></summary>
 
 Install natively with the built-in `cmd skills` command. Command Code clones the repo, discovers every `SKILL.md`, and installs into `.commandcode/skills/`:
@@ -234,7 +205,7 @@ Installed skills show up in the TUI slash menu, e.g. `/spec-driven-development`.
 <details>
 <summary><b>Other Agents</b></summary>
 
-Skills are plain Markdown - they work with any agent that accepts system prompts or instruction files. See [docs/getting-started.md](docs/getting-started.md).
+Skills are plain Markdown - they work with any agent that accepts system prompts or instruction files. See [docs/getting-started.md](docs/getting-started.md). Hosts that install the pack but aren't listed above are in [docs/other-hosts.md](docs/other-hosts.md).
 
 </details>
 

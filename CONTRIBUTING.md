@@ -72,6 +72,14 @@ Before proposing a change, search the [skill-change rejection ledger](evals/skil
 
 If a skill or description change is rejected based on eval results, add one row to the ledger with the date, affected skill, concise attempted change, before-to-after rank-1 score, and rejected PR link and outcome. Land that ledger-only update separately on the default branch; do not leave it only on the rejected proposal branch, where closing or force-pushing the proposal could discard the record.
 
+## Adding a Host Guide
+
+The README install section lists only hosts a maintainer has installed and run the current release on. Every other host gets one line in [docs/other-hosts.md](docs/other-hosts.md): the host name and its install command. No dedicated setup page, vendor links, logos, emoji, or screenshots.
+
+- If you work for the company behind the host, say so in the PR.
+- A host moves into the README once a maintainer has run it and is willing to keep its entry current.
+- Host guides are reviewed in the order they were opened.
+
 ## Repo-scoped files
 
 `AGENTS.md` and `CLAUDE.md` at the repo root configure agents working on the [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) repository itself. When writing setup guides or docs, do not instruct users to copy these files into their own projects or into a global agent configuration; the reusable assets are the skills in `skills/`.
