@@ -216,8 +216,8 @@ Before every commit:
 # 1. Check what you're about to commit
 git diff --staged
 
-# 2. Ensure no secrets
-git diff --staged | grep -i "password\|secret\|api_key\|token"
+# 2. Ensure no secrets (lists matching file names only — any output means review them)
+git diff --staged -i -G'password|secret|api_key|token' --name-only
 
 # 3. Run tests
 npm test
