@@ -127,9 +127,9 @@ for (const [name, trace] of Object.entries({
       assert.equal(fs.existsSync(`${base}.grading.json`), false);
       assert.equal(fs.readFileSync(`${base}.execution.raw.txt`, 'utf8'), trace);
       assert.equal(fs.readFileSync(path.join(root, 'claude-calls.txt'), 'utf8'), 'executor\n');
-      } finally { fs.rmSync(root, { recursive: true, force: true }); }
-    });
-  }
+    } finally { fs.rmSync(root, { recursive: true, force: true }); }
+  });
+}
 
 for (const id of [null, 0, 2]) {
   test(id === null ? 'behavioral default grades every case' : `behavioral --eval ${id} grades only the selected case`, () => {
