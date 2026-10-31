@@ -49,6 +49,9 @@ jobs:
       - name: Test quality-gate report handling
         run: node --test scripts/quality-gate-test.js
 
+      - name: Test staged-secret scan reference
+        run: node --test scripts/staged-secret-scan-test.js
+
       - name: Test session-start hook payload
         run: bash hooks/session-start-test.sh
 
